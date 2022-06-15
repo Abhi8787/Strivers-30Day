@@ -12,36 +12,33 @@ class program
     for(int i=0 ; i<arr.length ; i++)
        arr[i] = scn.nextInt();
 
-   
-    int odd = ((n+1)/2)*((n+1)/2);
-    int even = (n/2)*((n/2)+1);
+   int[] ans = new int[2];    
+        
+    long sum   = ((n*(n+1))/2);
+    long sqsum = ((n*(n+1)*(2*n+1))/6);
 
-
-    int codd = 0;
-    int ceven = 0;
+    long x_minus_y = sum;
+    long x2_minus_y2 = sqsum;
 
     for(int val : arr)
     {
-      if(val % 2 == 0)
-        ceven += val;
-
-      else
-        codd += val;
+        x_minus_y  -= val;
+        x2_minus_y2 -= val*val;
     }
+           
+     long missing = (((x2_minus_y2)/(x_minus_y)) + x_minus_y)/2;
+     long repeating = missing - x_minus_y;
+        
+     ans[0] = (int)missing;   
+     ans[1] = (int)repeating;
+        
+     System.out.println();
+     System.out.println();
+
+      for(int val : ans)
+       System.out.print(val + "  " );
 
 
-
-    if(odd - codd < 0)
-    {
-       System.out.println("Missing Number is " + (even - ceven) );
-       System.out.println("Repeating Number is " + (codd-odd) );      
-    }
-     
-    else
-    {
-       System.out.println("Missing Number is " + (odd - codd));
-       System.out.println("Repeating Number is " + (ceven-even) );      
-    }
-    
+        
   }
 }
